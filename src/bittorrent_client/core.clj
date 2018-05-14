@@ -2,11 +2,6 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as string]))
 
-(defn -main
-  "this will kick off the whole process"
-  [x] (println x "..."))
-
-
 ;; Bencoder
 (defn decode-number [stream delimiter & result]
   (let [c (char (.read stream))]
@@ -30,6 +25,7 @@
                (decode-string stream (decode-number stream ":"))))))))
 
 
+;; The main decode function
 (defn decode [stream]
   (let [indicator (.read stream)]
     (case indicator
@@ -44,6 +40,8 @@
       (io/input-stream)
       ))
 
-(decode (seq metainfo-stream))
-;; Parsing metainfo file
+;; Main
+(defn -main
+  "this will kick off the whole process"
+  [x] (println x "..."))
 
